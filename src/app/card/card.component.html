@@ -1,0 +1,26 @@
+
+<div class="container">
+    <p>Card Details</p>
+    <div class="form-group">
+        <label>Card Name</label>
+        <input type="text" class="form-control" [(ngModel)]="cardTitle" placeholder="Enter Card Title here...!!" />
+    </div>
+    <div class="form-group">
+        <label>Card Description</label>
+        <textarea class="form-control" id="cardDescription" [(ngModel)]="description" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+        <label>Comments</label>
+        <div class="row comment-row" *ngFor="let comment of comments;let ind = index;">
+            <p class="col-11">{{comment}}</p>
+            <button type="button" (click)="removeComment(ind)" title="delete comment" class="close col-1" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="newComment" placeholder="Enter Card Title here...!!" />
+        <button class="btn btn-info" (click)="addComment()">Add Comment</button>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-info" (click)="updateCardDetails()">Add Card</button>
+    </div>
+</div>

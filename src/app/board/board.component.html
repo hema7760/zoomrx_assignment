@@ -1,0 +1,50 @@
+
+<div #board class="board-class container">
+
+    <div class="row container" style="justify-content: space-between;">
+
+        <h3 class="board-title">{{boardTitle}} </h3><span class="btn" (click)="changeEditMode()" ristyle="cursor:pointer;">Edit Name</span>
+    </div>
+    <div class="row container" *ngIf="editMode">
+        <input type="text"  class="form-control col-11"  [(ngModel)]="boardTitle" (change)="changeBoardTitle($event)"  value="{{boardTitle}}" />
+        <button type="button" (click)="changeEditMode()" class="close col-1" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    
+    <div class="row container">
+        <div #list class="list-tile col-3" *ngFor="let list of listsToDisplay;let id = index;">
+            <div class="row list-title-row">
+                <p class=" col-6 list-title"> {{list.listName}}</p>
+                <button class=" close col-2 btn btn-default" (click)="deleteList(id)"  aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+                
+
+                    <div  class="card-tile"  *ngFor="let card of list.cardList;let cardIndex = index;">
+                        <div class="row">
+                            <p class="card-title col-10">{{card.cardTitle}}</p>
+                            
+                        </div>
+                        <p class="card-description">{{card.description}}</p>
+                        <div class="row delete-card ">
+                        
+                            <button class="btn btn-default col-2" (click)="editCard(cardIndex,id)">Edit</button>
+                            <button type="button" (click)="removeCardFromList(cardIndex, id)" title="delete card" class="close col-2" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                    
+                    </div>
+                
+           
+            <div>
+                <button class="btn btn-default add-card" (click)="addNewCard(id)">Add new Card</button>
+            </div>
+        </div>
+        <div class="list-tile col-2">
+            <div class="row">
+                <a style="padding-left:15px;cursor:pointer;padding-top:10px;"(click)="addNewList()">Add new list..</a>
+            </div>
+        </div>
+    </div>
+</div>
